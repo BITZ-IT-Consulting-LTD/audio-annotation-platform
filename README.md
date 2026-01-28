@@ -1,6 +1,29 @@
-# Audio Transcription System
+# Audio Annotation Platform
 
-A complete audio transcription system built for research and development, consisting of three integrated components that work together to provide automated speech recognition (ASR) capabilities through Label Studio.
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+
+An open-source audio annotation platform for managing audio transcription workflows. Built for scalability and ease of use, it bridges Label Studio with external ASR (Automatic Speech Recognition) agents through a high-performance FastAPI middleware.
+
+**Perfect for**: Research labs, transcription services, ASR model development, and audio dataset creation.
+
+## ✨ Key Features
+
+- 🎯 **Direct Audio Streaming** - Efficient file serving with HTTP range request support
+- 🔒 **Smart Task Locking** - Redis-based locking prevents duplicate work
+- ⏭️ **Skip with Cooldown** - Agents can skip problematic tasks with automatic cooldown
+- 📊 **Agent Statistics** - Track performance, earnings, and transcription quality
+- 🔄 **Real-time Queue** - Background sync keeps task assignments fast
+- 🐳 **Docker Ready** - Easy deployment with Docker Compose
+- 🛡️ **Production Ready** - Systemd integration, audit logging, and security hardening
+
+## 📚 Documentation
+
+- **[Quick Start Guide](#-quick-start)** - Get up and running in minutes
+- **[API Reference](docs/API_REFERENCE.md)** - Complete API documentation
+- **[Architecture Guide](docs/ARCHITECTURE.md)** - System design and data flow
+- **[Contributing Guide](CONTRIBUTING.md)** - How to contribute
+- **[Examples](examples/)** - Sample configurations and clients
 
 ## 🏗️ System Architecture
 
@@ -105,10 +128,10 @@ A complete audio transcription system built for research and development, consis
    # Log out and back in to apply docker group membership
    ```
 
-2. **Deploy the system:**
+2. **Clone and deploy the system:**
    ```bash
-   git clone https://github.com/openchlsystem/openchs_rnd.git
-   cd openchs_rnd/tasks/asr/audio_transcription_system
+   git clone https://github.com/BITZ-IT-Consulting-LTD/audio-annotation-platform.git
+   cd audio-annotation-platform
    sudo ./scripts/deploy.sh
    ```
 
@@ -267,18 +290,6 @@ PROJECT_ID=1
 - **Range request support**: Efficient audio seeking
 - **Redis caching**: Fast task distribution
 - **Async processing**: High concurrency support
-
-## 📝 License
-
-This project is part of the OpenCHS R&D initiative.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch
-3. Make changes in appropriate component directory
-4. Test using provided testing tools
-5. Submit pull request
 
 ## 🐛 Troubleshooting
 
@@ -458,31 +469,61 @@ docker compose -f /opt/label-studio/docker-compose.yml logs -f  # Follow Label S
 - **5432**: PostgreSQL (localhost only)
 - **6379**: Redis (localhost only)
 
-## 📝 Deployment Notes
+## 🤝 Contributing
 
-### Improvements Made
-- **✅ Portable deployment**: Script automatically detects user and sets correct permissions
-- **✅ Container permissions**: Automated handling of Label Studio container user (1001:1001)
-- **✅ Service configuration**: Dynamic systemd service file generation with correct user
-- **✅ Environment loading**: Systemd service properly loads `.env` files
-- **✅ Docker Compose v2**: Updated to use modern `docker compose` plugin format
-- **✅ Network setup**: Automated Docker network creation
-- **✅ Comprehensive troubleshooting**: Real-world deployment issues documented
+We welcome contributions! Whether you're fixing bugs, improving documentation, or proposing new features, your help is appreciated.
 
-### Deployment Validation
-After deployment, verify system health:
-```bash
-# All services should show healthy status
-curl http://localhost:8010/api/health
-# Expected: {"status":"healthy","label_studio":"connected","redis":"connected","project_id":1}
+**Ways to contribute:**
+- 🐛 Report bugs and issues
+- 💡 Suggest new features or improvements
+- 📖 Improve documentation
+- 🔧 Submit pull requests
 
-# Web interfaces should be accessible
-curl -s -o /dev/null -w "%{http_code}" http://localhost:8080  # Should return 302
-curl -s -o /dev/null -w "%{http_code}" http://localhost:8010/api/health  # Should return 200
-```
+Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## 🌟 Use Cases
+
+- **Research Labs**: Manage audio annotation workflows for linguistics and speech research
+- **ASR Development**: Create training datasets for speech recognition models
+- **Transcription Services**: Distribute work across human transcribers efficiently
+- **Quality Assurance**: Review and verify automated transcriptions
+- **Multi-language Projects**: Organize transcription tasks by language and project
+
+## 📖 Additional Documentation
+
+- **[Service Setup Guide](docs/SERVICE_SETUP.md)** - Systemd service configuration
+- **[Implementation Guide](docs/IMPLEMENTATION_GUIDE.md)** - Detailed implementation notes
+- **[Upgrade History](docs/UPGRADE_HISTORY.md)** - System evolution and changes
+- **[Label Studio README](label-studio/README.md)** - Label Studio specific documentation
+- **[Audio Import README](audio-import/README.md)** - Audio import utilities
+
+## 📝 License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+
+**GPL-3.0 means:**
+- ✅ You can use this software for any purpose
+- ✅ You can modify and distribute modified versions
+- ✅ You can use it commercially
+- ❗ If you distribute modified versions, you must also license them under GPL-3.0
+- ❗ You must disclose source code when distributing
+
+## 🙏 Acknowledgments
+
+- Built with [Label Studio](https://labelstud.io/) - Excellent open-source annotation tool
+- [FastAPI](https://fastapi.tiangolo.com/) - Modern, fast web framework for Python
+- Redis, PostgreSQL, and the many open-source tools that make this possible
+
+## 📬 Contact & Support
+
+- **Issues**: [GitHub Issues](https://github.com/BITZ-IT-Consulting-LTD/audio-annotation-platform/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/BITZ-IT-Consulting-LTD/audio-annotation-platform/discussions)
+- **Security**: For security vulnerabilities, please email directly (see SECURITY.md)
+
+## ⭐ Star History
+
+If you find this project useful, please consider giving it a star! It helps others discover the project.
 
 ---
 
-**System Status**: Production-ready ✅
-**Last Updated**: September 2025
-**Maintained by**: OpenCHS R&D Team
+**Made with ❤️ by the open source community**
